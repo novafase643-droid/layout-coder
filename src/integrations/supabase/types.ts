@@ -14,16 +14,135 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      admin_settings: {
+        Row: {
+          adhesion_fee: number
+          approved_amount: number
+          created_at: string | null
+          id: string
+          pix_copy_paste: string | null
+          pix_key: string | null
+          pix_qr_code_url: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          adhesion_fee?: number
+          approved_amount?: number
+          created_at?: string | null
+          id?: string
+          pix_copy_paste?: string | null
+          pix_key?: string | null
+          pix_qr_code_url?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          adhesion_fee?: number
+          approved_amount?: number
+          created_at?: string | null
+          id?: string
+          pix_copy_paste?: string | null
+          pix_key?: string | null
+          pix_qr_code_url?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      loan_applications: {
+        Row: {
+          adhesion_fee: number
+          approved_amount: number
+          bank_account: string | null
+          bank_account_cpf: string | null
+          bank_account_holder: string | null
+          bank_agency: string | null
+          cpf: string
+          created_at: string | null
+          email: string
+          id: string
+          name: string
+          phone: string
+          status: Database["public"]["Enums"]["loan_status"]
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          adhesion_fee: number
+          approved_amount: number
+          bank_account?: string | null
+          bank_account_cpf?: string | null
+          bank_account_holder?: string | null
+          bank_agency?: string | null
+          cpf: string
+          created_at?: string | null
+          email: string
+          id?: string
+          name: string
+          phone: string
+          status?: Database["public"]["Enums"]["loan_status"]
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          adhesion_fee?: number
+          approved_amount?: number
+          bank_account?: string | null
+          bank_account_cpf?: string | null
+          bank_account_holder?: string | null
+          bank_agency?: string | null
+          cpf?: string
+          created_at?: string | null
+          email?: string
+          id?: string
+          name?: string
+          phone?: string
+          status?: Database["public"]["Enums"]["loan_status"]
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string | null
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
+      loan_status:
+        | "pending"
+        | "approved"
+        | "payment_pending"
+        | "completed"
+        | "cancelled"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +269,15 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+      loan_status: [
+        "pending",
+        "approved",
+        "payment_pending",
+        "completed",
+        "cancelled",
+      ],
+    },
   },
 } as const
